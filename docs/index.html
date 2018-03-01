@@ -3,13 +3,12 @@
     <head>
         <meta charset="utf-8">
 
-        <title>TM.</title>
-        <meta name="description" content="Presentation for Opex Supply Chain Case Study">
+        <title>Talent Marketplace</title>
         <meta name="author" content="Joe Han">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
         <link rel="stylesheet" href="css/reveal.css">
-        <link rel="stylesheet" href="css/theme/black.css" id="theme">
+        <link rel="stylesheet" href="css/theme/moon.css" id="theme">
 
         <!-- Theme used for syntax highlighting of code -->
         <link rel="stylesheet" href="lib/css/zenburn.css">
@@ -29,6 +28,12 @@
 <style type="text/css">
     p.left_align{
         text-align: left;
+    }
+    ul,li,p {
+        font-size: 50px !important;
+    }
+    ul {
+        margin-left: 60px !important;  
     }
     #left {
       left:-8.33%;
@@ -51,7 +56,7 @@
         <div class="reveal">
             <div class="slides">
                 <section>
-                    <h3>Air Force Talent Marketplace</h3>
+                    <h2>Air Force Talent Marketplace</h2>
                     <p>
                     Next Generation Assignment System
                     <br>
@@ -59,7 +64,7 @@
                     </p>
                 </section>
                 <section>
-                    <h3>Overview</h3>
+                    <h2>Overview</h2>
                     <ol>
                         <li>What is Talent Marketplace?</li>
                         <li>Development</li>
@@ -70,77 +75,71 @@
                     </ol>
                 </section>
                 <section>
-                    <h3>What is Talent Marketplace?</h3>
-                    <ol>
-                        <ul>New Assignment System to replace AMS/ADP</ul>
-                        <ul>Web app with better UI + matching Algorithm</ul>
-                    </ol>
+                    <h2>What is Talent Marketplace?</h2>
+                    <ul>
+                        <li>New Assignment System to replace AMS/ADP</li>
+                        <li>Web app with better UI + matching Algorithm</li>
+                    </ul>
                 </section>
                 <section>
-                    <h3>Development</h3>
-                    <p>
-                        Built a prototype/backup web application. <br>
-                        Used off-network machine with a hotspot
-                    </p>
+                    <h2>Development</h2>
+                    <ul>
+                        <li>Built a prototype/backup web application</li>
+                        <li>Used off-network machine with a hotspot</li>
+                    </ul>
                 </section>
                 <section>
-                    <h3>Tools</h3>
-                    <ol>
-                        <ul><a href="https://github.com/johangithub/tm" target="_blank">Git</a></ul>
-                        <ul><a href="http://localhost:8080" target="_blank">Javascript</a>
-                            <ul>Node.js</ul>
-                            <ul>Vue.js</ul>
-                            <ul>crossfilter.js</ul>
-                            <ul>d3.js/dc.js</ul>
+                    <h2>Tools</h2>
+                    <ul>
+                        <li><a href="https://github.com/johangithub/tm" target="_blank">Git</a></li>
+                        <li><a href="http://localhost:8080" target="_blank">Javascript</a>: Node.js, Vue.js, crossfilter.js, d3.js/dc.js</li>
+                        <li>Sqlite</li>
+                        <li>Material Design</li>
+                        <li>Text Editors: Vim, Sublime</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Project Management</h2>
+                    <ul>
+                        <li>Contract Awarded mid-Oct</li>
+                        <li>Sprint Reviews</li>
+                        <li>Algorithm Reviews</li>
+                        <li>Data Pulls</li>
+                        <li>Tech Support</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Way Ahead</h2>
+                    <ul>
+                        <li>Match with Summer 2018 Cycle is ending</li>
+                        <li>Winter 2018 Cycle will include all Rated, 17D, etc.</li>
+                        <li>Further refinement in UI and algorithm</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Failures</h2>
+                    <ul>
+                        <li>Air Force IT is too rigid and static</li>
+                        <ul>
+                            <li>Unable to secure a server</li>
+                            <li>Developed outside of AFNET</li>
+                            <li>Risk aversion in internal software development</li>
                         </ul>
-                        <ul>Sqlite</ul>
-                        <ul>Material Design</ul>
-                        <ul>Text Editors
-                            <ul>Vim</ul>
-                            <ul>Sublime</ul>
-                        </ul>
-                    </ol>
+                        <li>Required data cleaning</li>
+                        <li>Lack of knowledge in available tools</li>
+                        <li>Intentional lack of messaging</li>
+                    </ul>
                 </section>
                 <section>
-                    <h3>Project Management</h3>
-                    <ol>
-                        <ul>Contract Awarded mid-Oct</ul>
-                        <ul>Sprint Reviews</ul>
-                        <ul>Algorithm Reviews</ul>
-                        <ul>Data Pulls</ul>
-                        <ul>Tech Support</ul>
-                    </ol>
-                </section>
-                <section>
-                    <h3>Way Ahead</h3>
-                    <ol>
-                        <ul>Match with Summer 2018 Cycle is ending</ul>
-                        <ul>Winter 2018 Cycle will include all Rated, 17D, etc.</ul>
-                        <ul>Furter refinement in UI and algorithm</ul>
-                    </ol>
-                </section>
-                <section>
-                    <h3>Failures</h3>
-                    <ol>
-                        <ul>Air Force IT is too rigid and static</ul>
-                        <ul>Unable to secure a server</ul>
-                        <ul>Developed outside of AFNET</ul>
-                        <ul>Risk aversion in internal software development</ul>
-                        <ul>Required data cleaning</ul>
-                        <ul>Lack of knowledge in available tools</ul>
-                        <ul>Intentional lack of messaging</ul>
-                    </ol>
-                </section>
-                <section>
-                    <h3>Solutions</h3>
+                    <h2>Solutions</h2>
                     <p>61A must adopt web development as a core competency
-                        <ol>
-                            <ul>Add immediate value to operators</ul>
-                            <ul>Force Air Force IT to be more agile</ul>
-                            <ul>Stay up-to-date with latest analytical tools</ul>
-                            <ul>Maintain data integrity</ul>
-                        </ol>
                     </p>
+                        <ul>
+                            <li>Add immediate value to operators</li>
+                            <li>Force Air Force IT to be more agile</li>
+                            <li>Stay up-to-date with latest analytical tools</li>
+                            <li>Maintain data integrity</li>
+                        </ul>
                 </section>
             </div>
         </div>
