@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+
+        <title>Opex.</title>
+        <meta name="description" content="Presentation for Opex Supply Chain Case Study">
+        <meta name="author" content="Joe Han">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+<style type="text/css">
+    p.left_align{
+        text-align: left;
+    }
+    #left {
+      left:-8.33%;
+      text-align: left;
+      float: left;
+      width:50%;
+      z-index:-10;
+    }
+
+    #right {
+      left:31.25%;
+      top: 75px;
+      float: right;
+      text-align: left;
+      z-index:-10;
+      width:50%;
+    }
+</style>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section>
+                    <h3>Opex Case Study 
+                    <p>
+                    <small>Optimizing Supply Chain</small>
+                    <br>
+                        <small>Joe Han</small>
+                    </p>
+                </section>
+                <section>
+                    <h3>Overview</h3>
+                    <ol>
+                        <ul>Problem Summary</ul>
+                        <ul>Solution</ul>
+                        <ul>Formulation/Explanation</ul>
+                    </ol>
+                </section>
+                <section>
+                    <h3>Problem Summary</h3>
+                    <p style="text-align: left">With 4 plants, 50 customers, and 5 products to deliver to each customers throughout the US:</p>
+                    <ol>
+                        <li>Find the minimum number of warehouses to achieve 80% of 500-mile coverage for all customers</li>
+                        <li>Find optimal allocation of resources in producing and delivering products that maximizes profit with an option to upgrade plants</li>
+                    </ol>
+                    <p class="left_align">Click <a href="./barchart.html" target="_blank">here</a> for more detailed information on demand</p>
+                </section>
+                <section>
+                    <h6>Problem 1 Solution</h6>
+                    <!-- <div style="position: relative"> -->
+                    <p class="left_align">Place 4 warehouses in customer locations 5 (Dallas), 8 (Boise), 31 (Pittsburgh), 39 (City of Industry)</p>
+                    <p class="fragment fade-in fade-out left_align" style="position:absolute;" data-fragment-index="1">
+                    Baseline Cost and 500-mile Coverage <br>
+                    Transportation Cost: <span id="no_warehouse_transport_cost"></span><br>
+                    Product 1: <span id="baseline_1_coverage"></span><br>
+                    Product 2: <span id="baseline_2_coverage"></span><br>
+                    Product 3: <span id="baseline_3_coverage"></span><br>
+                    Product 4: <span id="baseline_4_coverage"></span><br>
+                    Product 5: <span id="baseline_5_coverage"></span><br>
+                    </p>
+                    <p class="fragment fade-in left_align" style="position:absolute;" data-fragment-index="2">
+                    With Warehouses Cost and 500-mile Coverage<br>
+                    Transportation Cost: <span id="warehouse_transport_cost"></span> (<a style="color: red">+<span id="cost_difference"></span></a>)<br>
+                    Product 1: <span id="product_1_coverage"></span>(<a style="color: green">+<span id="coverage_diff_1"></span></a>)<br>
+                    Product 2: <span id="product_2_coverage"></span>(<a style="color: green">+<span id="coverage_diff_2"></span></a>)<br>
+                    Product 3: <span id="product_3_coverage"></span>(<a style="color: green">+<span id="coverage_diff_3"></span></a>)<br>
+                    Product 4: <span id="product_4_coverage"></span>(<a style="color: green">+<span id="coverage_diff_4"></span></a>)<br>
+                    Product 5: <span id="product_5_coverage"></span>(<a style="color: green">+<span id="coverage_diff_5"></span></a>)<br>
+                    </p>
+                    <!-- </div> -->
+                </section>
+                <section>
+                    <h6>Problem 2 <span class="fragment fade-in" data-fragment-index="1">Solution</span></h6>
+                    <p class="fragment fade-out left_align" style="position: absolute" data-fragment-index="1">
+                    Baseline Scenario: Plants 1,2,3 each fulfill products 1,2,3 and plant 4 fulfill products 4 and 5 <br><br>
+                    Revenue: <span id="baseline_revenue"></span><br>
+                    Production Cost: <span id="baseline_production_cost"></span><br>
+                    Transportation Cost: <span id="baseline_transport_cost"></span><br>
+                    Setup Cost: <span id="baseline_setup_cost"></span><br>
+                    Upgrade Cost: <span id="baseline_upgrade_cost"></span><br>
+                    Profit: <span id="baseline_profit"></span><br>
+                    </p>
+                    <p class="fragment fade-in left_align" style="position: absolute" data-fragment-index="1">Recommendation: Upgrade plants 1,2,3. Let plants 1,2,3 each fulfill products 1-3 to the closest customer location while plants 2 and 3 running overtime as needed. Let plant 4 fulfill products 4 and 5 nationwide. <br><br>
+                    Revenue: <span id="upgrade_revenue"></span><br>
+                    Production Cost: <span id="upgrade_production_cost"></span> (<a style="color: green"><span id="production_cost_diff"></span></a>)<br>
+                    Transportation Cost: <span id="upgrade_transport_cost"></span> (<a style="color: green"><span id="transport_cost_diff"></span></a>)<br>
+                    Setup Cost: <span id="upgrade_setup_cost"></span> (<a style="color: red">+<span id="setup_cost_diff"></span></a>)<br>
+                    Upgrade Cost: <span id="upgrade_upgrade_cost"></span> (<a style="color: red">+<span id="upgrade_cost_diff"></span></a>)<br>
+                    Profit: <span id="upgrade_profit"></span> (<a style="color: green">+<span id="profit_diff"></span></a>)<br>
+                    </p>
+                </section>
+                <section>
+                    <h6>Problem 2 Solution</h6>
+                    <p class="left_align">Baseline Utilization Rate <br>
+                    Plant 1: <span id="baseline_utilization_1">102.6%</span><br>
+                    Plant 2: <span id="baseline_utilization_2">50.4%</span><br>
+                    Plant 3: <span id="baseline_utilization_3">20.69%</span><br>
+                    Plant 4: <span id="baseline_utilization_4">13.69%</span><br>
+                    <br><br>
+                    Recommended Scenario Utilization Rate <br>
+                    Plant 1: <span id="upgrade_utilization_1"></span><br>
+                    Plant 2: <span id="upgrade_utilization_2"></span><br>
+                    Plant 3: <span id="upgrade_utilization_3"></span><br>
+                    Plant 4: <span id="upgrade_utilization_4"></span><br><br>
+                    </p>
+                </section>
+                <section>
+                    <h3>Questions?</h3>
+                </section>
+                <section>
+                    <h6>Problem 1 Formulation</h6>
+                    <p style="font-size: 30px" class="left_align">Let $w_j \in \{0,1\}$ be the decision variable of warehouse built at customer location $j \in [1,50]$, given <br>
+                        $d_{jj'}$: the distance between customer $j$ and $j'$ <br>
+                        $p^{k}_{j}$: distance between product $k$ and customer $j$ (note: $p^{4}_{j} =p^{5}_{j}$) and customer $j$, $k \in [1,5]$,<br>
+                        $D^{k}_{j}$: demand for customer $j$ for product $k$, <br>
+                        $x^{k}_{j} = 1$ if customer $j$ has a coverage from a plant for product $k$ and 0 otherwise, <br>
+                        $y_{j} = 1$ if customer $j$ has a coverage from a warehouse and 0 otherwise, <br>
+                        $c_j^{k}$ is an indicator variable that shows whether product $k$ is covered for customer $j$.<br>
+                        We seek to find the vector $\textbf{w}$ with some large $M$:
+                    $$\min \sum_{i}^{50}w_i \tag{1}$$
+                    $$s.t. \quad \sum_{j}^{50}(c^{k}_{j}D^{k}_{j}) \geq (0.8)\sum_{j}^{50}D^{k}_{j} \quad \forall k \tag{2}$$
+                    $$p^k_j \leq 500 + M(1-x^{k}_{j}), \forall j,k \tag{3}$$
+                    $$w_{j} d_{jj'} \leq 500 + M(1-y_{j'}), \forall j \tag{4}$$
+                    $$c^k_j \leq x^k_j + y_j, \forall j, k \tag{5}$$
+                    $$x^k_j \leq c^k_j, \forall j,k \tag{6}$$
+                    $$y_j \leq c^k_j, \forall j,k \tag{7}$$
+                    $$c^k_j \in \{0,1\}, \forall j, k \tag{8}$$
+                    </p>
+                </section>
+                <section>
+                    <h6>Problem 1 Explanation</h6>
+                    <p class="left_align">Equation (1) seeks to minimize the number of warehouses to place in all customer locations. Equation (2) forces the constraint of 80% demand coverage for all products. Equation (3) forces $x_j^k$ to be 1 if covered by the specific plant and Equation (4) forces $y_j$ to be 1 if a warehouse is placed within 500 miles. Equation (5),(6), and (7) forces a logical OR, where if either $x_j^k$ or $y_j$ is 1, then it forces $c_j^k$ to be 1, otherwise 0. </p>
+                </section>
+                <section>
+                    <h6>Problem 1 Explanation</h6>
+                    <p class="left_align">Quite a few feasible solutions exist that satisfy the constraints with the objective function of 4 (i.e. number of plants) to achieve 80% of demand coverage by tons. No LP solvers were used to solve this problem. Instead, a brute force approach was used with a little bit of preprocessing of data to reduce the solution space. I solved all of my problems using client-side javascript as shown in the log. (Ctrl+Shift+I for Firefox and Chrome) <br><br>
+                    Let $S_i$ be a cluster, $j \in S_i$. There are 10 clusters that share the exactly same coverage characteristics such that $c^k_j = c^k_{j'} \forall k$ where $j'$ and $j$ share the same cluster (e.g., ${j',j \in S_i}$). We would pick no more than 1 customer from each cluster to maximize coverage while minimizing the number of houses. <br>
+                    There also exists a relationship where a customer or cluster strictly dominates coverage of the other customer or a cluster. For example, Cluster 3 strictly dominates Customer 44 (Chandler, AZ) and Cluster 6 (NorCal), since each of customers in Cluster 6 covers all of customers that Cluster 3 or Customer 44 covers and more. See this <a href="./usmap.html" target="_blank">map</a> for more detail.</p>
+                    <p id="left" class="left_align">
+                        Cluster 1: [1, 23, 29, 46] (NJ, PA) <br>
+                        Cluster 2: [2, 28, 36, 43] (FL) <br>
+                        Cluster 3: [3, 25, 26, 33, 39] (Los Angeles)<br>
+                        Cluster 4: [5, 6, 16, 17, 34, 41, 49] (TX) <br>
+                        Cluster 5: [7, 24, 50] (Buffalo) <br>
+                    </p>
+                    <p id="right" class="left_align">
+                        Cluster 6: [9, 22, 38, 45] (NorCal) <br>
+                        Cluster 7: [10, 20] (MN) <br>
+                        Cluster 8: [13, 47] (NY, CT) <br>
+                        Cluster 9: [15, 37] (Portland) <br>
+                        Cluster 10: [21, 42] (MA, NH)<br>
+                    </p>
+                </section>
+                <section>
+                    <h6>Problem 1 Explanation</h6>
+                    <p class="left_align">
+                        Using the logic from the previous slide, the candidate warehouses narrowed down to the following 14 locations : 2, 5, 7, 8, 12, 13, 14, 24, 27, 30, 31, 35, 39, 50. Solution space, $14\choose n$ where $n = \sum_{j}w_j$, grows combinatorially, but finding the solution was quite trivial and was accomplished easily on the browser's javascript engine. This method can clearly fail as possible customer location grows. <br><br>
+                        Each iteration of warehouse combination yielded a demand coverage and calculation. The combination with the minimum transportation cost to meet the 80% coverage was chosen using the code in the following slide.
+                    </p>
+                </section>
+                <section>
+                    <h6>Problem 1 Explanation</h6>
+                    <pre class="js stretch">
+                        <code>
+function calculate_demand(warehouses){
+    //Set already covered customers' demands to 0        
+    var demand_list = []
+    for(let product=1;product<=5;product++){
+        var plant_id = product == 5 ? 4 : product
+        var covered_customers = data.dist_p2c.filter(d=>d.dist<=500 && d.plant_id == plant_id).map(d=>d.customer_id)
+        demand_list.push(data.demand.filter(d=>d.product_id == product).map(d=>{
+            return covered_customers.includes(d.customer_id) ? 0 : d.demand
+        }))
+    }
+
+    //Map backto customer_id for transport cost calculation
+    var warehouse_ind = _.map(warehouses, (d,i) => d>0 ? i+1 : 0).filter(d=>d>0)
+    var warehouse_transport_cost = {}
+    var plant_to_warehouse_cost = [0, 0, 0, 0]
+    var plant_transport_cost = [0, 0, 0, 0]
+    var demand_covered = [0, 0, 0, 0, 0]
+    warehouse_ind.map(d => warehouse_transport_cost[d]= [0, 0, 0, 0, 0])
+    //For each customer and demand, pick the closest option and be fulfilled by that.
+    for (let demand of data.demand){
+        var plant_id = demand.product_id == 5 ? 4 : demand.product_id
+        var plant = _.find(data.dist_p2c, d=>d.customer_id==demand.customer_id && d.plant_id == plant_id)
+        var closest_warehouse = _.sortBy(data.dist_c2c.filter(d=>d.customer_to==demand.customer_id && warehouse_ind.includes(d.customer_from)),d=>d.dist)[0]
+        closest_warehouse.customer_id = closest_warehouse.customer_from
+        //Fulfilled directly by plant
+        if (plant.dist < closest_warehouse.dist && plant.dist <= 500){
+            // console.log(`Product ${demand.product_id} for Customer ${demand.customer_id} is fulfilled by the plant`)
+            plant_transport_cost[plant.plant_id-1] += Math.ceil(demand.demand / 10) * 2 * plant.dist
+            demand_covered[demand.product_id-1] += demand.demand
+        //fulfilled by plant
+        } else if (plant.dist > closest_warehouse.dist && closest_warehouse.dist <= 500){
+            // console.log(`Product ${demand.product_id} for Customer ${demand.customer_id} is fulfilled by the warehouse`)    
+            warehouse_transport_cost[closest_warehouse.customer_id][demand.product_id-1] += Math.ceil(demand.demand / 10) * 2 * closest_warehouse.dist
+            let plant_to_warehouse_dist = _.find(data.dist_p2c, d=>d.customer_id==closest_warehouse.customer_id && d.plant_id ==plant_id).dist
+            plant_to_warehouse_cost[plant_id-1] += Math.ceil(demand.demand/10) * 2 * plant_to_warehouse_dist
+            demand_covered[demand.product_id-1] += demand.demand
+        } else {
+            //Not covered at all, so fulfill straight from the plant, but don't add it to demand_covered
+            plant_transport_cost[plant.plant_id-1] += Math.ceil(demand.demand / 10) * 2 * plant.dist
+        }
+    }
+    //Straight from plant to customer + warehouse to customer + plant to warehouse
+    var total_warehouse_to_customer = _.sum(Object.values(warehouse_transport_cost).map(d=>_.sum(d)))
+    var total_plant_to_customer = _.sum(plant_transport_cost)
+    var total_plant_to_warehouse = _.sum(plant_to_warehouse_cost)
+    var total_transport_cost = total_warehouse_to_customer + total_plant_to_customer + total_plant_to_warehouse
+
+    var demand_covered_percent = demand_covered.map((d,i)=>(d/total_demand(i+1)))
+    return [demand_covered, demand_covered_percent, total_transport_cost]
+}
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h6>Problem 2 Formulation</h6>
+                    <p style="font-size: 30px" class="left_align">Since we must fulfill all demand and individual revenue is fixed regardless of the source, the total revenue is fixed at <span id="baseline_revenue"></span> and baseline production cost is fixed at <span id="raw_product_cost"></span>. <br>
+                        Thus, we maximize profit by minimizing the variable costs, such as overtime hours, transportation cost, upgrade cost, and setup cost. <br>
+                        Let $t_{ijq}^k$: Transport cost from plant $i$ to customer $j$ for product $k$ in quarter $q$ <br>
+                        $s_i$: Days spent setup for plant $i$ <br>
+                        $u_i$: Indicator variable for upgrade of plant $i$, $u_i \in \{0,1\}$ <br>
+                        $r_{iq}^k$: Regular working-hour production for product $k$ at plant $i$ for quarter $q$ in tons<br>
+                        $o_{iq}^k$: Overtime production for product $k$ at plant $i$ for quarter $q$ in tons<br>
+                        $x_{ijq}^k$: Product $k$ demand fulfilled by plant $i$ for customer $j$ in quarter $q$ <br>
+                        $C_{i}^{k}$: Annual Capacity for plant $i$ to produce product $k$ <br>
+                    </p>
+                </section>
+                <section>
+                    <p style="font-size: 20px" class="left_align">
+                        \begin{equation}\min \sum_{k}^{5}\sum_{i}^{4}\sum_{j}^{50}\sum_q^4 t_{ijq}^k + 5000s_i + 10000000u_i + (6-k)100r_{iq}^k+(6-k)150o_{iq}^k \tag{1}\end{equation}
+                        $$s.t. \quad t_{ijq}^k = 2 \lceil{}x_{ijq}^k / 10\rceil{} d_{ij} \quad \forall i,j,k,q \tag{2}$$
+                        $$\sum_{i} x_{ijq}^k \geq D_{j}^k / 4, \quad \forall j, k, q \tag{3}$$
+                        $$\sum_k \sum_j x_{ijq}^k \leq (\sum_{k}r_{iq}^k + \sum_{k}o_{iq}^k), \quad \forall q, i \tag{4}$$
+                        $$\sum_k r_{iq}^k \leq 720, \quad \forall i, q \tag{5}$$
+                        $$\sum_k o_{iq}^k \leq 360, \quad \forall i, q \tag{6}$$
+                        $$\sum_k \sum_j \sum_q x_{ijq}^k \le C_i^k, \quad \forall i, k \tag{7}$$
+                        $$(1-u_i)(\sum_k^{k \neq i} x^k_{ijq}) \leq 0, \quad \forall j, q, \quad i \in {1,2,3}\tag{8}$$
+                        $$(1-u_4)(\sum_k^{k \leq 3} x^k_{ijq}) \leq 0, \forall j, q \tag{9}$$
+                    </p>
+                </section>
+                <section>
+                    <h6>Problem 2 Explanation</h6>
+                    <p style="font-size: 30px" class="left_align">
+                    The previous formulation is not quite complete, as it doesn't account for plant setup transition in the constraints. Also, an LP solver was not used to handle this problem. The problem was modeled using an object-oriented programming and iterated through a couple of simulation as shown in the code next slide. Thus, optimality of this solution is not guaranteed. Equation (1) does capture all of variable costs in scenario 2, transportation cost, setup cost, upgrade cost, and production cost. Equation (2) defines transportation cost. Equation (3) requires all plants to meet the quarterly demand for every product and customer each quarter. Equation (4)-(6) sets an upper bound on production for each quarter based on production capability. Equation (7) sets an upperbound on production for each plant and product due to annual capacity. Equation (8) and (9) forces the plants to produce its original products unless upgraded. <br><br>
+                    </p>
+                </section>
+                <section>
+                    <h6>Problem 2 Explanation</h6>
+                    <pre class="js stretch">
+                        <code>
+class Scenario {
+    constructor(name, upgraded, available_plants){
+        this.name = name
+        this.upgraded = upgraded
+        this.upgrade_cost = upgraded.length * 10000000
+        this.available_plants = available_plants
+        this.customers = []
+        this.plants = []
+        this.demands = []
+        this.profit = 0
+        this.transport_cost = 0
+        this.revenue = 0
+        this.production_cost = 0
+        this.setup_cost = 0
+        this.quarter = 1
+    }
+    plan(){
+        //assign production plan and target production amount to each plant
+        var sorted_demands = _.sortBy(this.demands, d=>-get_marginal_profit(d, this.plants, this.available_plants))
+            function get_marginal_profit(demand, plants, available_plants){
+                //All available plants in this scenario sorted by the distance
+                var production_cost_per_ton = (6-demand.product_id)*100
+                // var plant_choices = available_plants[demand.product_id]
+                var plant_choices = plants.filter(d=>available_plants[demand.product_id].includes(d.plant_id)).map(d=>{
+                    d.dist = _.find(data.dist_p2c, v=>v.customer_id==demand.customer_id && v.plant_id==d.plant_id).dist
+                    return d
+                })
+
+                //Calculate possible profit for each available plant and sort by largest to smallest profit
+                var profit = _.sortBy(
+                    plant_choices.map(d=> {
+                        d.profit = (demand.revenue * demand.quarterly_demand_reamining - d.dist*2*Math.ceil(demand.quarterly_demand_reamining/10) - production_cost_per_ton * demand.quarterly_demand_reamining)
+                        return d
+                    }),d=>-d.profit)
+                //plants possible is ordered in profit
+                demand.plants_possible = profit.map(d=>d.plant_id)
+                // console.log(`Product ${demand.product_id}, Customer ${demand.customer_id}, Demand: ${demand.quarterly_demand_reamining}, Profit: ${profit[0].profit}`)
+                if (profit.length > 1){
+                    return profit[0].profit - profit[1].profit
+                } else {
+                    return 1e9
+                }
+            }
+        for (let demand of sorted_demands){
+            //For product 4 and 5, simply assign to plant 4 and only in Q1
+            var assigned_plant = 0
+            if (demand.product_id >=4){
+                if (this.quarter == 1){
+                    this.plants[3].target_fulfillment[3] = _.sum(this.demands.filter(d=>d.product_id==4).map(d=>d.demand))
+                    this.plants[3].target_fulfillment[4] = _.sum(this.demands.filter(d=>d.product_id==5).map(d=>d.demand))
+                    assigned_plant = this.plants[3]
+                    demand.assigned_plant_id = 4
+                    demand.dist = assigned_plant.get_distance_to_customers(demand.customer_id)
+                    assigned_plant.target_fulfillment[demand.product_id-1] += demand.demand
+                }
+
+            } else {
+                //Check if plant can handle the demand.
+                for (let plant_id of demand.plants_possible){
+                    var plant_candidate = _.find(this.plants, d=>d.plant_id == plant_id)
+                    if (plant_candidate.capacity_remaining_quarterly[demand.product_id] >= demand.quarterly_demand_reamining &&
+                        plant_candidate.production_remaining_quarterly >= demand.quarterly_demand_reamining){
+
+                        //Reduce planned capacity and production
+                        assigned_plant = plant_candidate
+                        assigned_plant.capacity_remaining_quarterly[demand.product_id] -= demand.quarterly_demand_reamining
+                        assigned_plant.production_remaining_quarterly -= demand.quarterly_demand_reamining
+                        demand.assigned_plant_id = assigned_plant.plant_id
+                        demand.dist = assigned_plant.get_distance_to_customers(demand.customer_id)
+                        break;
+                    }
+                }
+                assigned_plant.target_fulfillment[demand.product_id-1] += demand.quarterly_demand_reamining
+            }
+        }
+
+
+    }
+
+    //We should only deliver once each quarter, since it theoretically takes one day
+    deliver(){
+        this.q_revenue = 0
+        this.q_profit = 0
+        this.q_production_cost = 0
+        this.q_transport_cost = 0
+        this.q_setup_cost = 0
+        // //Delivery
+        // //The idea is that we assign each plant to fulfill demand at the end of quarter
+        // TODO: Combine shipments to customers
+        for (let demand of this.demands){
+            var assigned_plant = _.find(this.plants, d=>d.plant_id==demand.assigned_plant_id)
+            if (demand.quarterly_demand_reamining - assigned_plant.inventory[demand.product_id-1]  <= 1e-3){
+                var fulfilled_tons = demand.quarterly_demand_reamining
+                assigned_plant.inventory[demand.product_id-1] -= fulfilled_tons
+                var revenue = demand.revenue * fulfilled_tons
+                var transport_cost = Math.ceil(fulfilled_tons / 10) * 2 * demand.dist
+                assigned_plant.transport_cost += transport_cost
+                this.q_revenue += revenue
+                this.q_transport_cost += transport_cost
+
+            } else {
+                console.log(`Product ${demand.product_id} for Customer ${demand.customer_id} could not be fulfilled by the Plant ${demand.assigned_plant_id}`)
+            }
+            
+
+            //Display fulfillment
+            if (fulfilled_tons > 0){
+                // console.log(`From Plant ${assigned_plant.plant_id} fulfilled Customer ${demand.customer_id} Product ${demand.product_id} ${fulfilled_tons} tons` )
+            }
+        }
+
+        this.q_production_cost = _.sum(this.plants.map(d=>d.production_cost))
+        this.q_setup_cost = _.sum(this.plants.map(d=>d.setup_cost))
+        this.q_profit = this.q_revenue - this.q_profit - this.q_transport_cost - this.q_setup_cost
+
+        this.transport_cost += this.q_transport_cost
+        this.revenue += this.q_revenue
+        this.production_cost += this.q_production_cost
+        this.setup_cost += this.q_setup_cost
+        this.profit = this.revenue - this.transport_cost - this.production_cost - this.setup_cost - this.upgrade_cost
+    }
+}
+
+class Demand {
+    constructor(product_id, customer_id, demand){
+        this.product_id = product_id
+        this.customer_id = customer_id
+        this.demand = demand
+        this.revenue = this.customer_id >= 40 ? 1200 : 1000
+        this.reset_quarterly()
+    }
+    reset_quarterly(){
+        this.quarterly_demand_reamining = this.demand / 4
+    }
+}
+
+// Establish classes for object-oriented programming approach
+class Customer {
+    constructor(customer_id, city, state, lat, long){
+        this.customer_id = customer_id
+        this.city = city
+        this.state = state
+        this.lat = lat
+        this.long = long
+        this.dist_p2c = data.dist_p2c.filter(d=>d.customer_id==this.customer_id)
+        this.dist_c2c = data.dist_c2c.filter(d=>d.customer_from==this.customer_id)
+    }
+    get customers_within_500(){
+        return this.dist_c2c.filter(d=>d.dist <= 500).map(d=>d.customer_to)
+    }
+    closest_plant(){
+        return _.minBy(this.dist_p2c, d=>d.dist)
+    }
+    get_distance_to_plants(plant_id){
+        //If plant id not provided, return all plants
+        if (plant_id=== undefined){
+            return this.dist_p2c
+        } else {
+            return _.find(this.dist_p2c, d => d.plant_id == plant_id).dist
+        }
+    }
+    get_distance_to_customers(customer_id){
+        if (customer_id=== undefined){
+            return this.dist_c2c
+        } else {
+            return _.find(this.dist_c2c, d => d.customer_to == customer_id).dist
+        }
+    }
+}
+
+class Plant {
+    constructor(plant_id, city, state, lat, long){
+        this.plant_id = plant_id
+        this.city = city
+        this.state = state
+        this.lat = lat
+        this.long = long
+        this.dist_p2c = data.dist_p2c.filter(d=>d.plant_id==this.plant_id)
+        this.current_product = this.plant_id
+        this.production_rate = this.plant_id == 1 ? 100 : 50
+        this.inventory = [0,0,0,0,0]
+        this.reset_quarterly()
+    }
+    get customers_within_500(){
+        return this.dist_p2c.filter(d=>d.dist <= 500).map(d=>d.customer_id)
+    }
+    get production_cost_per_ton(){
+        return (6-this.current_product)*100
+    }
+    get utilization_rate(){
+        return d3.format(".2%")(this.quarterly_production / (this.production_rate * 8 * (90 - (this.setup_cost/5000) )))
+    }
+    reset_quarterly(){
+        this.revenue = 0
+        this.transport_cost = 0
+        this.production_cost = 0
+        this.setup_cost = 0
+        this.days_remaining_quarterly = 90
+        this.setup_days = 0
+        this.overtime = false
+        this.overtime_hours = 0
+        this.quarterly_production = 0
+        this.target_fulfillment = [0,0,0,0,0]
+        this.capacity = {}
+        this.production_remaining_quarterly = this.production_rate * 12 * this.days_remaining_quarterly
+        data.capacity.filter(d=>d.plant_id == this.plant_id).map(d=>{
+            this.capacity[d.product_id] = d.capacity / 4
+        })
+        this.capacity_remaining_quarterly = _.clone(this.capacity)
+    }
+    get_distance_to_customers(customer_id){
+        //If customer id not provided, return all customers
+        if (customer_id=== undefined){
+            return this.dist_p2c
+        } else {
+            return _.find(this.dist_p2c, d=>d.customer_id==customer_id).dist
+        }
+    }
+    work_overtime(){
+        this.overtime = true
+    }
+    switch_product(to){
+        var setup_days = _.find(data.setup, d=> d.from == this.current_product && d.to==to).days
+        this.current_product = to
+        this.days_remaining_quarterly -= setup_days
+        this.setup_days = setup_days
+        this.setup_cost += (setup_days * 5000)
+    }
+    produce(){
+        //Produce for one day
+        this.days_remaining_quarterly -= 1
+
+        var hours_left = 8
+
+        // If setting up, skip producing
+        if (this.setup_days>0){
+            // console.log(`Plant ${this.plant_id} setting up to ${this.current_product}...`)
+            this.setup_days -= 1
+
+        //Only for [1,2,3], because we'll finish annaul demand for plant 4 and 5 in one quarter
+        } else if([1,2,3].includes(this.current_product) && this.capacity[this.current_product] <= 0){
+            console.log(`Plant ${this.plant_id} reached max quarterly capacity for Product ${this.current_product}`)
+        } else {
+
+            if (this.plant_id == 4){   
+                var tons_made = Math.min(8*this.production_rate, this.target_fulfillment[this.current_product-1])
+            } else {
+                //Tons produced
+                var tons_made = Math.min(8*this.production_rate, this.target_fulfillment[this.current_product-1], this.capacity[this.current_product])
+            }
+
+            this.quarterly_production += tons_made
+
+            //Add produced items to inventory
+            this.inventory[this.current_product-1] += tons_made
+
+            //Add production cost
+            this.production_cost += this.production_cost_per_ton * tons_made
+
+            //Reduce capacity
+            this.capacity[this.current_product] -= tons_made
+
+            //Reduce target number
+            this.target_fulfillment[this.current_product-1] -= tons_made 
+
+            if (this.overtime && this.target_fulfillment[this.current_product-1]>0){
+                var overtime_production = Math.min(4 * this.production_rate, this.target_fulfillment[this.current_product-1], this.capacity[this.current_product])
+                this.quarterly_production += overtime_production
+                this.inventory[this.current_product-1] += overtime_production
+                this.production_cost += this.production_cost_per_ton * 1.5 * overtime_production
+                this.capacity[this.current_product] -= overtime_production
+                this.target_fulfillment[this.current_product-1] -= overtime_production 
+                this.overtime_hours += overtime_production/this.production_rate
+            }
+        }
+    }
+}
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h6>Closing Thoughts to Opex Team</h6>
+                    <p class="left_align">
+                        Thanks for the interesting case study; I really enjoyed tackling these problems. While I am confident of my work I produced, I assess that the solution is not optimal, especially for Problem 2. If given more time than 20 hours, I wish to improve on problem formulation, and solving both problems as an integer programming problem to apply more rigor in reaching optimal solution. <br>
+                        -Joe <br><br>
+                        Link to <a href="https://github.com/johangithub/opex/blob/master/docs" target="_blank">repository</a> and <a href="https://github.com/johangithub/opex/blob/master/docs/js/main.js" target="_blank">code</a>
+                    </p>
+                </section>
+
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+        
+        <script src="js/d3.v4.min.js"></script>
+        <script src="js/d3.tip.js"></script>
+        <script src="js/lodash.min.js"></script>
+        <script src="js/math.min.js"></script>
+
+        <!--Load Data  -->
+        <script src="data/demand.js"></script>
+        <script src="data/customers.js"></script>
+        <script src="data/dist_c2c.js"></script>
+        <script src="data/dist_p2c.js"></script>
+        <script src="data/plants.js"></script>
+        <script src="data/products.js"></script>
+        <script src="data/setup.js"></script>
+        <script src="data/capacity.js"></script>
+
+        <!-- Main d3 script -->
+        <script src="js/main.js"></script>
+
+        <script>
+
+            // More info https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                // progress: false,
+                history: true,
+                center: true,
+                width: 1920,
+                height: 1080,
+                margin: 0,
+                minScale: 0.2,
+                maxScale: 4,
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+                // More info https://github.com/hakimel/reveal.js#dependencies
+                dependencies: [
+                    { src: 'plugin/external/external.js', condition: function() { return !!document.querySelector( '[data-external]' ); } },
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true },
+                    { src: 'plugin/notes/notes.js', async: true },
+                    { src: 'plugin/math/math.js', async: true },
+                ]
+            });
+        </script>
+    </body>
+</html>
