@@ -13,6 +13,8 @@
         <!-- Theme used for syntax highlighting of code -->
         <link rel="stylesheet" href="lib/css/zenburn.css">
 
+        <!--material design icons-->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <!-- Printing and PDF exports -->
         <script>
             var link = document.createElement( 'link' );
@@ -35,6 +37,17 @@
     ul {
         margin-left: 60px !important;  
     }
+    html.transparent .slide-background {
+        opacity: 0.05 !important;
+    }
+    .reveal section img {
+        background: none;
+        border: none;
+        box-shadow: none;
+    }
+    .content-slide {
+        margin-top: 60px !important;
+    }
     #left {
       left:-8.33%;
       text-align: left;
@@ -55,16 +68,18 @@
     <body>
         <div class="reveal">
             <div class="slides">
-                <section>
-                    <h2>Air Force Talent Marketplace</h2>
-                    <p>
-                    Next Generation Assignment System
+                <section class="center">
                     <br>
+                    <h1>Air Force Talent Marketplace
+                    </h1>
+                    <h3 style="opacity: 0.85">Next Generation Assignment System</h3>
+                    <p>
                         Joe Han, Caleb Ziegler
                     </p>
                 </section>
-                <section>
+                <section class="content-slide">
                     <h2>Overview</h2>
+                    <br>
                     <ol>
                         <li>What is Talent Marketplace?</li>
                         <li>Development</li>
@@ -74,50 +89,82 @@
                         <li>Failures</li>
                     </ol>
                 </section>
-                <section>
+                <section class="content-slide">
                     <h2>What is Talent Marketplace?</h2>
+                    <br>
                     <ul>
                         <li>New Assignment System to replace AMS/ADP</li>
                         <li>Web app with better UI + matching Algorithm</li>
                     </ul>
                 </section>
-                <section>
-                    <h2>Development</h2>
-                    <ul>
-                        <li>Built a prototype/backup web application</li>
-                        <li>Used off-network machine with a hotspot</li>
-                    </ul>
+                <section data-background="./static/prototypeHome.png" data-background-transition="slide" data-background-size="90%" data-state="transparent">
+                    <section class="content-slide">
+                        <h2>Development</h2>
+                        <br>
+                        <ul>
+                            <li>Built a prototype/backup web application</li>
+                            <li>Configured server and database</li>
+                            <li>Used off-network machine with a hotspot</li>
+                        </ul>
+                        <!--<img src="./static/prototypeHome.png" width="50%">-->
+                    </section>
                 </section>
-                <section>
-                    <h2>Tools</h2>
-                    <ul>
-                        <li><a href="https://github.com/johangithub/tm" target="_blank">Git</a></li>
-                        <li><a href="http://localhost:8080" target="_blank">Javascript</a>: Node.js, Vue.js, crossfilter.js, d3.js/dc.js</li>
-                        <li>Sqlite</li>
-                        <li>Material Design</li>
-                        <li>Text Editors: Vim, Sublime</li>
-                    </ul>
+                <section data-background="./static/prototypeHome.png" data-background-size="90%">
                 </section>
-                <section>
-                    <h2>Project Management</h2>
-                    <ul>
-                        <li>Contract Awarded mid-Oct</li>
-                        <li>Sprint Reviews</li>
-                        <li>Algorithm Reviews</li>
-                        <li>Data Pulls</li>
-                        <li>Tech Support</li>
-                    </ul>
+                <section data-background="./static/tools.png" data-background-transition="slide" data-state="transparent" data-background-size="40%" data-background-repeat="repeat">
+                    <section class="content-slide">
+                        <h2>Tools</h2>
+                        <br>
+                        <ul>
+                            <li><a href="https://github.com/johangithub/tm" target="_blank">Git</a></li>
+                            <li><a href="http://localhost:8080" target="_blank">Javascript</a>
+                                <ul>
+                                    <li>Web Framework: Vue.js</li> 
+                                    <li>Backend: Node.js</li>
+                                    <li>Charts: crossfilter.js, d3.js/dc.js</li>
+                                </ul>
+                            </li>
+                            <li>Sqlite</li>
+                            <li>Material Design</li>
+                            <li>Text Editors: Vim, Sublime</li>
+                        </ul>
+                    </section>
                 </section>
-                <section>
+                <section data-background="./static/tm_prod.png" data-background-transition="slide" data-state="transparent" data-background-size="90%">
+                    <section class="content-slide">
+                        <h2>Project Management</h2>
+                        <br>
+                        <ul>
+                            <li>Contract Awarded mid-Oct</li>
+                            <li>Sprint Reviews</li>
+                            <li>Algorithm Reviews</li>
+                            <li>Data Pulls</li>
+                            <li>Tech Support</li>
+                        </ul>
+                    </section>
+                </section>
+                <section data-background="./static/tm_prod.png" data-background-size="90%">
+                </section>
+                <section class="content-slide">
                     <h2>Way Ahead</h2>
+                    <br>
                     <ul>
-                        <li>Match with Summer 2018 Cycle is ending</li>
-                        <li>Winter 2018 Cycle will include all Rated, 17D, etc.</li>
+                        <li>Match with Summer 2018 Cycle is ending
+                            <ul>
+                                <li>11F/12F community used TM</li>
+                            </ul>
+                        </li>
+                        <li>Winter 2018 Cycle beginning 
+                            <ul>
+                                <li>Rated, 17D, 38F, 41A communities using TM</li>
+                            </ul>
+                        </li>
                         <li>Further refinement in UI and algorithm</li>
                     </ul>
                 </section>
-                <section>
+                <section class="content-slide">
                     <h2>Failures</h2>
+                    <br>
                     <ul>
                         <li>Air Force IT is too rigid and static</li>
                         <ul>
@@ -130,16 +177,24 @@
                         <li>Intentional lack of messaging</li>
                     </ul>
                 </section>
-                <section>
+                <section class="content-slide">
                     <h2>Solutions</h2>
-                    <p>61A must adopt web development as a core competency
-                    </p>
+                    <br>
+                    <ul>
+                        <li><strong>61A must adopt web development as a core competency</strong></li>
                         <ul>
                             <li>Add immediate value to operators</li>
                             <li>Force Air Force IT to be more agile</li>
                             <li>Stay up-to-date with latest analytical tools</li>
                             <li>Maintain data integrity</li>
                         </ul>
+                    </ul>
+                </section>
+                <section class="content-slide">
+                    <h2>Questions</h2>
+                    <br>
+                    <br>
+                    <i class="material-icons" style="font-size: 400px;">help</i>
                 </section>
             </div>
         </div>
@@ -151,16 +206,6 @@
         <script src="js/lodash.min.js"></script>
         <script src="js/math.min.js"></script>
 
-        <!--Load Data  -->
-        <script src="data/demand.js"></script>
-        <script src="data/customers.js"></script>
-        <script src="data/dist_c2c.js"></script>
-        <script src="data/dist_p2c.js"></script>
-        <script src="data/plants.js"></script>
-        <script src="data/products.js"></script>
-        <script src="data/setup.js"></script>
-        <script src="data/capacity.js"></script>
-
         <!-- Main d3 script -->
         <script src="js/main.js"></script>
 
@@ -171,12 +216,13 @@
                 controls: true,
                 // progress: false,
                 history: true,
-                center: true,
+                center: false,
                 width: 1920,
                 height: 1080,
                 margin: 0,
                 minScale: 0.2,
                 maxScale: 4,
+                touch: true,
                 transition: 'slide', // none/fade/slide/convex/concave/zoom
 
                 // More info https://github.com/hakimel/reveal.js#dependencies
